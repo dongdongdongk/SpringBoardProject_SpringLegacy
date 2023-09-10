@@ -1,72 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+	pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>간단한 계산기</title>
-    <style>
-        table {
-            border-collapse: collapse;
-        }
+<title>간단한 계산기</title>
+<style>
+table {
+	border-collapse: collapse;
+}
 
-        table, th, td {
-            border: 1px solid black;
-        }
+table, th, td {
+	border: 1px solid black;
+}
 
-        th, td {
-            padding: 10px;
-            text-align: center;
-            cursor: pointer; /* 커서 모양을 포인터로 변경 */
-        }
+th, td {
+	padding: 10px;
+	text-align: center;
+	cursor: pointer; /* 커서 모양을 포인터로 변경 */
+}
 
-        #result {
-            font-size: 24px;
-            background-color: #f2f2f2;
-            text-align: right;
-            padding: 10px;
-            user-select: none; /* 텍스트 선택 비활성화 */
-        }
+#result {
+	font-size: 24px;
+	text-align: right;
+	padding: 10px;
+	user-select: none; /* 텍스트 선택 비활성화 */
+}
 
-        /* 선택된 버튼의 스타일 */
-        .selected {
-            background-color: gray;
-            color: white;
-        }
-    </style>
+/* 선택된 버튼의 스타일 */
+.selected {
+	background-color: gray;
+	color: white;
+}
+</style>
 </head>
 <body>
-    <h1>간단한 계산기</h1>
-    <table>
-        <tr>
-            <td colspan="4" id="result">0</td>
-        </tr>
-        <tr>
-            <td onclick="addToResult('7')">7</td>
-            <td onclick="addToResult('8')">8</td>
-            <td onclick="addToResult('9')">9</td>
-            <td onclick="addToResult('*')">x</td>
-        </tr>
-        <tr>
-            <td onclick="addToResult('4')">4</td>
-            <td onclick="addToResult('5')">5</td>
-            <td onclick="addToResult('6')">6</td>
-            <td onclick="addToResult('-')">-</td>
-        </tr>
-        <tr>
-            <td onclick="addToResult('1')">1</td>
-            <td onclick="addToResult('2')">2</td>
-            <td onclick="addToResult('3')">3</td>
-            <td onclick="addToResult('+')">+</td>
-        </tr>
-        <tr>
-            <td onclick="clearLastCharacter()">Del</td>
-            <td onclick="addToResult('0')">0</td>
-            <td onclick="addToResult('.')">.</td>
-            <td onclick="calculateResult()">=</td>
-        </tr>
-    </table>
+	<h1>간단한 계산기</h1>
+	<table>
+		<tr>
+			<td colspan="4" id="result">0</td>
+		</tr>
+		<tr>
+			<td onclick="addToResult('7')">7</td>
+			<td onclick="addToResult('8')">8</td>
+			<td onclick="addToResult('9')">9</td>
+			<td onclick="addToResult('*')">x</td>
+		</tr>
+		<tr>
+			<td onclick="addToResult('4')">4</td>
+			<td onclick="addToResult('5')">5</td>
+			<td onclick="addToResult('6')">6</td>
+			<td onclick="addToResult('-')">-</td>
+		</tr>
+		<tr>
+			<td onclick="addToResult('1')">1</td>
+			<td onclick="addToResult('2')">2</td>
+			<td onclick="addToResult('3')">3</td>
+			<td onclick="addToResult('+')">+</td>
+		</tr>
+		<tr>
+			<td onclick="clearLastCharacter()">Del</td>
+			<td onclick="addToResult('0')">0</td>
+			<td onclick="addToResult('.')">.</td>
+			<td onclick="calculateResult();">=</td>
+		</tr>
+	</table>
 
-    <script>
+	<script>
         let currentInput = '';
         let currentOperation = '';
         let resultDisplay = document.getElementById('result');
@@ -79,7 +78,7 @@
 
             // 현재 입력값의 마지막 문자가 연산자인지 확인
             const lastChar = currentInput[currentInput.length - 1];
-            if (['*', '-', '+','.'].includes(lastChar) && ['*', '-', '+','.'].includes(value)) {
+            if (['*', '-', '+','.','='].includes(lastChar) && ['*', '-', '+','.','='].includes(value)) {
                 // 연속된 연산자는 추가하지 않음
                 return;
             }
@@ -112,6 +111,14 @@
 
         function calculateResult() {
             try {
+            	const lastChar = currentInput[currentInput.length - 1];
+                if (['*', '-', '+','.'].includes(lastChar)) {
+
+                    return;
+                  }
+
+
+                
                 const result = eval(currentInput);
                 if (!isNaN(result)) {
                     currentInput = result.toString();
