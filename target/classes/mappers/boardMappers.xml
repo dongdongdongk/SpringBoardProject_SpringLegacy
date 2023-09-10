@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+	<mapper namespace="woo.edu.c.dao.BoardDao">
+
+		
+<!-- 	리스트출력 -->
+		<select id="getBoardList" resultType="boardVo">
+			SELECT 
+				   NUM,
+				   TITLE,
+				   CONTENTS,
+				   WRITER,
+				   WRITEDAY
+			 FROM  BOARD
+		    ORDER BY WRITEDAY DESC 
+		</select>
+<!-- 게시글 상세 -->
+		<select id = "getBoardDetail" parameterType="boardVo" resultType="boardVo">
+			SELECT 
+			       NUM,
+				   TITLE,
+				   CONTENTS,
+				   WRITER,
+				   WRITEDAY
+			  FROM BOARD
+			WHERE NUM = #{num}	
+		</select>	
+<!-- 게시글 추가 -->
+		
+		<insert id="setBoardAdd" parameterType="boardVo">
+			<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+ 				SELECT emp_seq.NEXTVAL 
+ 				  FROM DUAL
+ 			</selectKey>
+			INSERT INTO BOARD
+							 VALUES(
+				  				     #{num}
+			                        ,#{title}
+			                        ,#{contents}
+			                        ,#{writer}
+			                        ,SYSDATE
+			                         )
+	 
+		</insert>
+		
+<!-- 게시글 삭제 -->
+		<delete id="setBoardDelete" parameterType="boardVo">
+			DELETE BOARD
+ 			WHERE NUM = #{num}
+		</delete>
+		
+<!-- 게시글 수정 -->
+		<update id="setBoardUpdate" parameterType="boardVo">
+			UPDATE BOARD SET 
+						      TITLE = #{title}
+							, CONTENTS = #{contents}
+							, WRITER = #{writer}
+			WHERE NUM = #{num}
+		</update> 
+		
+		
+	</mapper>
