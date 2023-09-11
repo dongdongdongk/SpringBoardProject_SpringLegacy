@@ -20,25 +20,32 @@ function addToResult(value) {
         if (currentInput.length > 1) {
             currentInput = currentInput.slice(0, -1); // 마지막 문자 제거
         }
-    } else if (currentInput.length < 12) { // Display up to 12 characters
+    } else if (currentInput.length < 40) { // 40개 제한
         currentInput += value;
     }
 
     resultDisplay.innerText = currentInput;
+    selectedButtonSetColor()
 
-    // 선택한 버튼의 스타일 변경 및 원래 색상으로 돌아가기
-    const button = event.target; // 이벤트 객체를 매개변수로 받아옵니다.
-    button.classList.add('selected');
-    setTimeout(() => {
-        button.classList.remove('selected');
-    }, 100);
 }
 
 function clearLastCharacter() {
     if (currentInput.length > 1) {
         currentInput = currentInput.slice(0, -1);
+    } else {
+      resultDisplay.innerText = 0;
     }
     resultDisplay.innerText = currentInput;
+    selectedButtonSetColor()
+}
+
+function selectedButtonSetColor() {
+      // 선택한 버튼의 스타일 변경 및 원래 색상으로 돌아가기
+      const button = event.target; // 이벤트 객체를 매개변수로 받아옵니다.
+      button.classList.add('selected');
+      setTimeout(() => {
+          button.classList.remove('selected');
+      }, 100);
 }
 
 function calculateResult() {
@@ -60,4 +67,5 @@ function calculateResult() {
         currentInput = 'Error';
         resultDisplay.innerText = currentInput;
     }
+    selectedButtonSetColor()
 }
