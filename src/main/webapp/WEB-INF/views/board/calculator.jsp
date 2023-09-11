@@ -17,17 +17,18 @@ table, th, td {
 th, td {
 	padding: 10px;
 	text-align: center;
-	cursor: pointer; /* 커서 모양을 포인터로 변경 */
+	cursor: pointer;
+    min-height: 100px;
 }
 
 #result {
-	font-size: 24px;
-	text-align: right;
-	padding: 10px;
-	user-select: none; /* 텍스트 선택 비활성화 */
+    width: 100%;
+    height: 20px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    text-align: right;
 }
 
-/* 선택된 버튼의 스타일 */
 .selected {
 	background-color: gray;
 	color: white;

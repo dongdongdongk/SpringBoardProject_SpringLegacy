@@ -19,7 +19,7 @@ function addToResult(value) {
         // Del 버튼을 눌렀을 때
         if (currentInput.length > 1) {
             currentInput = currentInput.slice(0, -1); // 마지막 문자 제거
-        }
+        } 
     } else if (currentInput.length < 40) { // 40개 제한
         currentInput += value;
     }
@@ -33,7 +33,8 @@ function clearLastCharacter() {
     if (currentInput.length > 1) {
         currentInput = currentInput.slice(0, -1);
     } else {
-      resultDisplay.innerText = 0;
+      calculateResult()
+      currentInput = "";
     }
     resultDisplay.innerText = currentInput;
     selectedButtonSetColor()
@@ -41,12 +42,14 @@ function clearLastCharacter() {
 
 function selectedButtonSetColor() {
       // 선택한 버튼의 스타일 변경 및 원래 색상으로 돌아가기
-      const button = event.target; // 이벤트 객체를 매개변수로 받아옵니다.
+      const button = event.target; 
       button.classList.add('selected');
       setTimeout(() => {
           button.classList.remove('selected');
       }, 100);
 }
+
+
 
 function calculateResult() {
     try {
@@ -64,8 +67,8 @@ function calculateResult() {
             resultDisplay.innerText = currentInput;
         }
     } catch (error) {
-        currentInput = 'Error';
         resultDisplay.innerText = currentInput;
+        return
     }
     selectedButtonSetColor()
 }
