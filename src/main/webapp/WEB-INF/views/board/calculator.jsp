@@ -1,9 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>°è»ê±â</title>
+<meta charset="UTF-8">
+<c:import url="../common/common.jsp"></c:import>
+<c:import url="../common/nav.jsp"></c:import>
+<head>
+<title>ê³„ì‚°ê¸°</title>
 <style>
 table {
 	border-collapse: collapse;
@@ -23,11 +28,12 @@ th, td {
 
 #result {
     width: 100%;
-    height: 20px;
+    height: 40px;
     margin-bottom: 10px;
     font-size: 20px;
     text-align: right;
 }
+
 
 .selected {
 	background-color: gray;
@@ -36,7 +42,7 @@ th, td {
 </style>
 </head>
 <body>
-	<h1>°è»ê±â</h1>
+	<h1>ê³„ì‚°ê¸°</h1>
 	<table>
 		<tr>
 			<td colspan="4" id="result">0</td>
