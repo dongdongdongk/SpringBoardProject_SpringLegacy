@@ -10,6 +10,7 @@
 		</ul></li>
 	<li role="presentation" class="boardMath"><a href="boardMath">구구단</a></li>
 	<li role="presentation" class="calculator"><a href="calculator">계산기</a></li>
+	<li role="presentation" class="calendar"><a href="calendar">캘린더</a></li>
 
 
 </ul>

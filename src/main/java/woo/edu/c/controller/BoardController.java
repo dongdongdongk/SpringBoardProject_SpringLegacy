@@ -172,6 +172,15 @@ public class BoardController {
 		return mv;
 		
 	}
+	//캘린더
+	@RequestMapping(value = "/board/calendar", method = RequestMethod.GET)
+	public ModelAndView getCalendar() throws Exception {
+		logger.info("calendar이동");
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/calendar");
+		return mv;
+		
+	}
 }
 
 
