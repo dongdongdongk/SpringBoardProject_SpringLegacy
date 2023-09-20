@@ -58,5 +58,15 @@ public class BoardServiceImpl implements BoardService{
 	public int setCalendar(CalendarVo calendarVo) {
 		return boardDao.setCalendar(calendarVo);
 	}
+	//캘린더 리스트 출력
+	@Override
+	public List<CalendarVo> getCalendarList(CalendarVo calendarVo) {
+		return boardDao.getCalendarList(calendarVo);
+	}
+	//캘린더 디테일 리스트 출력
+	@Override
+	public List<CalendarVo> getCalendarDetailList(CalendarVo calendarVo) {
+		return boardDao.getCalendarDetailList(calendarVo);
+	}
 	
 }

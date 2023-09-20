@@ -23,4 +23,8 @@ public interface BoardDao {
 	//캘린더 일정 추가 
 	int setCalendar(CalendarVo calendarVo);
 	
+	//캘린더 리스트 출력
+	List<CalendarVo> getCalendarList(CalendarVo calendarVo);
+	//캘린더 디테일 리스트 출력
+	List<CalendarVo> getCalendarDetailList(CalendarVo calendarVo);
 }

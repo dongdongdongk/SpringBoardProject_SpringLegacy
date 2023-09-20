@@ -80,4 +80,32 @@
 	 
 		</insert>		
 		
+<!-- 캘린더 리스트 가져오기 -->
+		<select id="getCalendarList" resultType="CalendarVO">
+			SELECT 
+				   CALNO,
+				   CALYEAR,
+				   CALMONTH,
+				   CALDAY,
+				   CALTIME,
+				   CALREQ,
+				   CALCONTENTS
+			 FROM  CALENDAR
+		</select>
+		
+<!-- 캘린더 리스트 디테일 -->
+		<select id="getCalendarDetailList" parameterType="CalendarVO" resultType="CalendarVO" >
+		     SELECT 
+				   CALNO,
+				   CALYEAR,
+				   CALMONTH,
+				   CALDAY,
+				   CALTIME,
+				   CALREQ,
+				   CALCONTENTS
+			 FROM  CALENDAR
+			 WHERE CALYEAR = #{calYear}
+			   AND CALMONTH = #{calMonth}
+			   AND CALDAY = #{calDay}
+		</select> 		
 	</mapper>

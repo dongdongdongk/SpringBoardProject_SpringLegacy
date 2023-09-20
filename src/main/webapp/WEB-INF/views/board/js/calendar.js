@@ -49,8 +49,9 @@ function calendarInit() {
         var nextDay = endDay.getDay();
 
         
-        //input 값 설정
-         
+        //속성 값 설정
+        let monthValue = currentMonth + 1;
+        let yearValue = currentYear;
         
         // console.log(prevDate, prevDay, nextDate, nextDay);
 
@@ -66,28 +67,14 @@ function calendarInit() {
         $('.fullDate').text(currentYear + "년 " + (currentMonth + 1) + "월 " + currentDate + "일"  );
         $('.inputDate').val(currentYear + "년 " + (currentMonth + 1) + "월 " + currentDate + "일"  );
         
-        
+        //체크박스 값 전송
         document.querySelector('form').addEventListener('submit', function(event) { 
             // 체크박스가 체크되었는지 확인
             if (document.getElementById("flexCheckDefault").checked) {
             	document.getElementById("flexCheckDefault_hidden").disabled = true;
             }
         });
-        
-//        //체크박스 값 
-//        let checkbox = document.querySelector('input[name="calReq"]');
-//        checkbox.addEventListener('change', function() {
-//            // 체크박스가 체크되었는지 확인
-//            if (checkbox.checked) {
-//                // 체크되었을 때 calReq 변수에 원하는 값을 설정
-//            	checkbox.value = "중요";
-//            } else {
-//                // 체크가 해제되었을 때 calReq 변수를 초기화
-//            	checkbox.value = "중요x";
-//            }
-//        });
-        
-        
+           
         // 렌더링 html 요소 생성
         calendar = document.querySelector('.dates')
         calendar.innerHTML = '';
@@ -98,7 +85,22 @@ function calendarInit() {
         }
         // 이번달
         for (var i = 1; i <= nextDate; i++) {
-        	calendar.innerHTML = calendar.innerHTML + "<a  class='day current' data-toggle='modal' data-target='#exampleModal'  value='" + i + "'>" + i + '</a>'
+            // a 엘리먼트 생성
+            var aElement = document.createElement('a');
+            
+            // 필요한 속성 설정
+            aElement.className = 'day current';
+            aElement.setAttribute('data-toggle', 'modal');
+            aElement.setAttribute('data-target', '#exampleModal');
+            aElement.setAttribute('month-Value', monthValue);
+            aElement.setAttribute('year-Value', yearValue);
+            aElement.setAttribute('value', i);
+            
+            // a 엘리먼트의 텍스트 설정
+            aElement.textContent = i;
+            
+            // calendar 엘리먼트에 a 엘리먼트 추가
+            calendar.appendChild(aElement);
         }
         // 다음달
         for (var i = 1; i <= (7 - nextDay == 7 ? 0 : 7 - nextDay); i++) {
@@ -139,4 +141,43 @@ function calendarInit() {
         thisMonth = new Date(currentYear, currentMonth + 1, 1);
         renderCalender(thisMonth); 
     });
+    
+    //캘린더 디테일 리스트 
+ // Modal 열릴 때 이벤트 핸들러
+    $('#exampleModal').on('show.bs.modal', function (event) {
+    	console.log("모달시작");
+        let button = $(event.relatedTarget);
+        let dayValue = button.attr('value');
+        console.log("클릭한 날짜 " + dayValue);
+        let monthValue = button.attr('month-Value');
+        console.log("클릭한 월" + monthValue);
+        let yearValue = button.attr('year-Value');
+        console.log("클릭한 년" + yearValue);
+        let modal = $(this);
+
+        // Ajax 요청을 보내서 해당 날짜의 일정 리스트를 가져옵니다.
+        $.ajax({
+            url: '/board/CalendarDetail',
+            method: 'POST',
+            data: { calDay: dayValue }, // 해당 날짜 값을 서버에 전달합니다.
+            success: function (data) {
+                // 서버에서 받아온 일정 리스트를 모달에 추가
+                var modalBody = modal.find('.modal-body');
+                modalBody.empty(); // 모달 내용 초기화
+
+                if (data && data.length > 0) {
+                    data.forEach(function (item) {
+                        // 각각의 일정을 모달에 추가합니다.
+                        modalBody.append('<p>시간: ' + item.calTime + ', 내용: ' + item.calContents + ', 중요: ' + (item.calReq === '1' ? '*' : '') + '</p>');
+                    });
+                } else {
+                    modalBody.append('<p>해당 날짜에 일정이 없습니다.</p>');
+                }
+            },
+            error: function () {
+                console.error('일정 가져오기 실패');
+            }
+        });
+    });
+    
 }

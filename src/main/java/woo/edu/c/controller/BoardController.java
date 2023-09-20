@@ -175,9 +175,11 @@ public class BoardController {
 	}
 	//캘린더
 	@RequestMapping(value = "/board/calendar", method = RequestMethod.GET)
-	public ModelAndView getCalendar() throws Exception {
+	public ModelAndView getCalendar(CalendarVo calendarVo) throws Exception {
 		logger.info("calendar이동");
 		ModelAndView mv = new ModelAndView();
+		List<CalendarVo> calendarList = boardService.getCalendarList(calendarVo);
+		mv.addObject("calendarList", calendarList);
 		mv.setViewName("board/calendar");
 		return mv;
 		
@@ -190,6 +192,18 @@ public class BoardController {
 		ModelAndView mv = new ModelAndView();
 		int result = boardService.setCalendar(calendarVo);
 		mv.setViewName("/board/calendar");
+		return mv;
+	}
+	
+	//캘린더 디테일 가져오기 
+	@ResponseBody
+	@RequestMapping(value = "/board/CalendarDetail", method = RequestMethod.POST)
+	public ModelAndView getCalendarDetailList(CalendarVo calendarVo) throws Exception {
+		logger.info("calendarList");
+		ModelAndView mv = new ModelAndView();
+		List<CalendarVo> calDetailList = boardService.getCalendarDetailList(calendarVo);
+		mv.addObject("calDetailList",calDetailList);
+		mv.setViewName("board/calendar");
 		return mv;
 	}
 }

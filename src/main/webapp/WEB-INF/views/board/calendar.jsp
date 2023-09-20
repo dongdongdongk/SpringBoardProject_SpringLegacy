@@ -46,6 +46,7 @@
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">스케줄 입력</h5>
 					<div class="fullDate"></div>
+					<div class="modal-body"></div>
 				<form action="/board/setCalendar" method="post" id="setCalendar">
 					<div class="cs-form">
 						<h5>년</h5>
