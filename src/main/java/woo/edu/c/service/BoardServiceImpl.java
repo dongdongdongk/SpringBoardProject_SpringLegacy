@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import woo.edu.c.controller.HomeController;
 import woo.edu.c.dao.BoardDao;
+import woo.edu.c.vo.CalendarVo;
 import woo.edu.c.vo.boardVo;
 import woo.edu.c.vo.testVo;
 
@@ -51,6 +52,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int setBoardUpdate(boardVo boardVo) {
 		return boardDao.setBoardUpdate(boardVo);
+	}
+	//캘린더 일정추가 
+	@Override
+	public int setCalendar(CalendarVo calendarVo) {
+		return boardDao.setCalendar(calendarVo);
 	}
 	
 }

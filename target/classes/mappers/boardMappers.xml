@@ -61,5 +61,23 @@
 			WHERE NUM = #{num}
 		</update> 
 		
+<!-- 캘린더 추가 -->
+			<insert id="setCalendar" parameterType="CalendarVO">
+			<selectKey keyProperty="calNo" resultType="Long" order="BEFORE">
+ 				SELECT calendar_seq.NEXTVAL 
+ 				  FROM DUAL
+ 			</selectKey>
+			INSERT INTO CALENDAR
+							 VALUES(
+				  				     #{calNo}
+			                        ,#{calYear}
+			                        ,#{calMonth}
+			                        ,#{calDay}
+			                        ,#{calTime}
+			                        ,#{calReq}
+			                        ,#{calContents}
+			                         )
+	 
+		</insert>		
 		
 	</mapper>

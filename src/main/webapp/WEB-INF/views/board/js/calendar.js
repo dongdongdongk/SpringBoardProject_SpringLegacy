@@ -48,25 +48,57 @@ function calendarInit() {
         var nextDate = endDay.getDate();
         var nextDay = endDay.getDay();
 
+        
+        //input 값 설정
+         
+        
         // console.log(prevDate, prevDay, nextDate, nextDay);
 
         // 현재 월 표기
         $('.month').text(currentMonth + 1);
+        $('.inputMonth').val(currentMonth + 1);
         
         // 햔제 년 표기
         $('.year').text(currentYear);
-
+        $('.inputYear').val(currentYear);
+       
+        // 년,월,날짜 표기
+        $('.fullDate').text(currentYear + "년 " + (currentMonth + 1) + "월 " + currentDate + "일"  );
+        $('.inputDate').val(currentYear + "년 " + (currentMonth + 1) + "월 " + currentDate + "일"  );
+        
+        
+        document.querySelector('form').addEventListener('submit', function(event) { 
+            // 체크박스가 체크되었는지 확인
+            if (document.getElementById("flexCheckDefault").checked) {
+            	document.getElementById("flexCheckDefault_hidden").disabled = true;
+            }
+        });
+        
+//        //체크박스 값 
+//        let checkbox = document.querySelector('input[name="calReq"]');
+//        checkbox.addEventListener('change', function() {
+//            // 체크박스가 체크되었는지 확인
+//            if (checkbox.checked) {
+//                // 체크되었을 때 calReq 변수에 원하는 값을 설정
+//            	checkbox.value = "중요";
+//            } else {
+//                // 체크가 해제되었을 때 calReq 변수를 초기화
+//            	checkbox.value = "중요x";
+//            }
+//        });
+        
+        
         // 렌더링 html 요소 생성
         calendar = document.querySelector('.dates')
         calendar.innerHTML = '';
         
         // 지난달
-        for (var i = prevDate - prevDay + 1; i <= prevDate; i++) {
+        for (var i = prevDate - prevDay ; i <= prevDate; i++) {
             calendar.innerHTML = calendar.innerHTML + '<div class="day prev disable">' + i + '</div>'
         }
         // 이번달
         for (var i = 1; i <= nextDate; i++) {
-            calendar.innerHTML = calendar.innerHTML + '<div class="day current">' + i + '</div>'
+        	calendar.innerHTML = calendar.innerHTML + "<a  class='day current' data-toggle='modal' data-target='#exampleModal'  value='" + i + "'>" + i + '</a>'
         }
         // 다음달
         for (var i = 1; i <= (7 - nextDay == 7 ? 0 : 7 - nextDay); i++) {
@@ -80,6 +112,21 @@ function calendarInit() {
             currentMonthDate[todayDate -1].classList.add('today');
         }
     }
+    
+    //클릭한  일 값 가져오기
+    $(document).on('click', '.day', function() {
+        // 클릭한 일자의 값을 가져옵니다.
+        let dayValue = $(this).attr('value');
+
+        // 모달 엘리먼트를 찾기.
+        let modal = $('#exampleModal');
+
+        // 모달 내부의 inputDay 엘리먼트를 찾아서 해당 엘리먼트의 value 값을 설정
+        modal.find('.inputDay').val(dayValue);
+
+        // 모달을 엽니다.
+        modal.modal('show');
+    });
 
     // 이전달로 이동
     $('.go-prev').on('click', function() {

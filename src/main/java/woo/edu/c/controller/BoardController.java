@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 import woo.edu.c.service.BoardService;
+import woo.edu.c.vo.CalendarVo;
 import woo.edu.c.vo.boardVo;
 import woo.edu.c.vo.testVo;
 
@@ -180,6 +181,16 @@ public class BoardController {
 		mv.setViewName("board/calendar");
 		return mv;
 		
+	}
+	
+	//캘린더 일정추가 
+	@RequestMapping(value = "/board/setCalendar", method = RequestMethod.POST)
+	public ModelAndView setCalendar(CalendarVo calendarVo) throws Exception {
+		logger.info("/board/setCalendar");
+		ModelAndView mv = new ModelAndView();
+		int result = boardService.setCalendar(calendarVo);
+		mv.setViewName("/board/calendar");
+		return mv;
 	}
 }
 

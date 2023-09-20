@@ -2,6 +2,7 @@ package woo.edu.c.dao;
 
 import java.util.List;
 
+import woo.edu.c.vo.CalendarVo;
 import woo.edu.c.vo.boardVo;
 import woo.edu.c.vo.testVo;
 
@@ -18,5 +19,8 @@ public interface BoardDao {
 	int setBoardDelete(boardVo boardVo);
 	//게시글 업데이트
 	int setBoardUpdate(boardVo boardVo);
+	
+	//캘린더 일정 추가 
+	int setCalendar(CalendarVo calendarVo);
 	
 }

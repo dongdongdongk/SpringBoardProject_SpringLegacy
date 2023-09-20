@@ -4,6 +4,7 @@
 	<typeAliases>
 		<typeAlias type="woo.edu.c.vo.testVo" alias="testVo"/>
 		<typeAlias type="woo.edu.c.vo.boardVo" alias="boardVo"/>
+		<typeAlias type="woo.edu.c.vo.boardVo" alias="CalendarVo"/>
 		<typeAlias type="java.lang.Long" alias="Long"/>
 	</typeAliases>
 </configuration>

@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import woo.edu.c.controller.HomeController;
+import woo.edu.c.vo.CalendarVo;
 import woo.edu.c.vo.boardVo;
 import woo.edu.c.vo.testVo;
 
@@ -50,6 +51,11 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int setBoardUpdate(boardVo boardVo) {
 		return sql.update(namespace + ".setBoardUpdate", boardVo);
+	}
+	//캘린더 일정추가 
+	@Override
+	public int setCalendar(CalendarVo calendarVo) {
+		return sql.insert(namespace + ".setCalendar", calendarVo);
 	}
 	
 }
