@@ -60,12 +60,17 @@ public class BoardDaoImpl implements BoardDao {
 	//캘린더 리스트 출력
 	@Override
 	public List<CalendarVo> getCalendarList(CalendarVo calendarVo) {
-		return sql.selectList(namespace + ".getCalendarList");
+		return sql.selectList(namespace + ".getCalendarList",calendarVo);
 	}
 	//캘린더 디테일 리스트 출력
 	@Override
 	public List<CalendarVo> getCalendarDetailList(CalendarVo calendarVo) {
-		return sql.selectList(namespace + ".getCalendarDetailList");
+		return sql.selectList(namespace + ".getCalendarDetailList",calendarVo);
+	}
+	//캘린더 스케줄 삭제
+	@Override
+	public int setCalendarDelete(CalendarVo calendarVo) {
+		return sql.delete(namespace + ".setCalendarDelete",calendarVo);
 	}
 	
 }

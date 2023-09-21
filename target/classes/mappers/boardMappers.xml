@@ -81,7 +81,7 @@
 		</insert>		
 		
 <!-- 캘린더 리스트 가져오기 -->
-		<select id="getCalendarList" resultType="CalendarVO">
+		<select id="getCalendarList" resultType="CalendarVo">
 			SELECT 
 				   CALNO,
 				   CALYEAR,
@@ -94,12 +94,9 @@
 		</select>
 		
 <!-- 캘린더 리스트 디테일 -->
-		<select id="getCalendarDetailList" parameterType="CalendarVO" resultType="CalendarVO" >
+		<select id="getCalendarDetailList" parameterType="CalendarVo" resultType="CalendarVo" >
 		     SELECT 
 				   CALNO,
-				   CALYEAR,
-				   CALMONTH,
-				   CALDAY,
 				   CALTIME,
 				   CALREQ,
 				   CALCONTENTS
@@ -107,5 +104,11 @@
 			 WHERE CALYEAR = #{calYear}
 			   AND CALMONTH = #{calMonth}
 			   AND CALDAY = #{calDay}
-		</select> 		
+		</select>
+		
+		<!-- 캘린더 스케줄 삭제 -->
+		<delete id="setCalendarDelete" parameterType="CalendarVo">
+			DELETE CALENDAR
+ 			WHERE CALNO = #{calNo}
+		</delete> 		
 	</mapper>

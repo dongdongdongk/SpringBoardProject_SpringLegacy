@@ -1,7 +1,9 @@
 package woo.edu.c.controller;
 
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -191,20 +194,44 @@ public class BoardController {
 		logger.info("/board/setCalendar");
 		ModelAndView mv = new ModelAndView();
 		int result = boardService.setCalendar(calendarVo);
-		mv.setViewName("/board/calendar");
+		mv.setViewName("board/calendar");
 		return mv;
 	}
 	
 	//캘린더 디테일 가져오기 
+	@RequestMapping(value = "/board/CalendarDetail", method = RequestMethod.GET)
 	@ResponseBody
-	@RequestMapping(value = "/board/CalendarDetail", method = RequestMethod.POST)
-	public ModelAndView getCalendarDetailList(CalendarVo calendarVo) throws Exception {
-		logger.info("calendarList");
+	public List<CalendarVo> getCalendarDetailList(CalendarVo calendarVo) throws Exception {
+	    logger.info("calendarList");
+	    List<CalendarVo> calDetailList = boardService.getCalendarDetailList(calendarVo);
+	    return calDetailList;
+	}
+	
+	//캘린더 데이터 리스트 가져오기 
+	@ResponseBody
+	@RequestMapping(value = "/board/CalendarListData", method = RequestMethod.GET)
+	public List<CalendarVo> getCalendarListDate(CalendarVo calendarVo) throws Exception {
+		logger.info("calendarListData");
+		List<CalendarVo> calendarVos = boardService.getCalendarList(calendarVo);
+		return calendarVos;
+	}
+	
+	//캘린더 스케줄 삭제
+	@RequestMapping(value = "/board/CalendarDelete",method = RequestMethod.GET)
+	public ModelAndView setCalendarDelete(CalendarVo calendarVo) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		List<CalendarVo> calDetailList = boardService.getCalendarDetailList(calendarVo);
-		mv.addObject("calDetailList",calDetailList);
-		mv.setViewName("board/calendar");
+		int result = boardService.setCalendarDelete(calendarVo);
 		return mv;
+	}
+	
+	@RequestMapping(value = "/board/getCurrentMonthYear", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Integer> getCurrentMonthYear() {
+	    Map<String, Integer> result = new HashMap<String, Integer>();
+	    Calendar cal = Calendar.getInstance();
+	    result.put("year", cal.get(Calendar.YEAR));
+	    result.put("month", cal.get(Calendar.MONTH) + 1); // 월은 0부터 시작하므로 1을 더해줍니다.
+	    return result;
 	}
 }
 

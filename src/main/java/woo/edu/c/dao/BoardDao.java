@@ -27,4 +27,7 @@ public interface BoardDao {
 	List<CalendarVo> getCalendarList(CalendarVo calendarVo);
 	//캘린더 디테일 리스트 출력
 	List<CalendarVo> getCalendarDetailList(CalendarVo calendarVo);
+	
+	//캘린더 스케줄 삭제
+	int setCalendarDelete(CalendarVo calendarVo);
 }

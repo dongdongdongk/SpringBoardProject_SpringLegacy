@@ -68,5 +68,10 @@ public class BoardServiceImpl implements BoardService{
 	public List<CalendarVo> getCalendarDetailList(CalendarVo calendarVo) {
 		return boardDao.getCalendarDetailList(calendarVo);
 	}
+	//캘린더 스케줄 삭제
+	@Override
+	public int setCalendarDelete(CalendarVo calendarVo) {
+		return boardDao.setCalendarDelete(calendarVo);
+	}
 	
 }
