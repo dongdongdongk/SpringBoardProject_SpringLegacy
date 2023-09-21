@@ -67,16 +67,23 @@
  				SELECT calendar_seq.NEXTVAL 
  				  FROM DUAL
  			</selectKey>
-			INSERT INTO CALENDAR
-							 VALUES(
-				  				     #{calNo}
-			                        ,#{calYear}
-			                        ,#{calMonth}
-			                        ,#{calDay}
-			                        ,#{calTime}
-			                        ,#{calReq}
-			                        ,#{calContents}
-			                         )
+			  INSERT INTO CALENDAR (
+				calNo,
+				calYear,
+				calMonth,
+				calDay,
+				calTime,
+				calReq,
+				calContents
+			) VALUES (
+				#{calNo},
+				#{calYear},
+				#{calMonth},
+				#{calDay},
+				#{calTime},
+				#{calReq},
+				#{calContents}
+			)
 	 
 		</insert>		
 		

@@ -47,7 +47,8 @@
 					<h5 class="modal-title" id="exampleModalLabel">스케줄 입력</h5>
 					<div class="fullDate"></div>
 					<div class="modalResult"></div>
-				<form action="/board/setCalendar" method="post" id="setCalendar">
+				<!-- <form action="/board/setCalendar" method="post" id="setCalendar" > -->
+				<div id="setCalendar" >
 					<div class="cs-form">
 						<input type="hidden" class="form-control inputYear" name="calYear" />
 					</div>
@@ -72,12 +73,12 @@
 						<input type="hidden" name="calReq" id="flexCheckDefault_hidden" value='0'/>
 						<label class="form-check-input" for="flexCheckDefault"> 중요 스케줄(체크시 * 표시됩니다.) </label>
 					</div>
-				</form>
+				</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal">취소</button>
-					<button type="submit" class="btn btn-primary" form="setCalendar">저장</button>
+						<button type="button" class="btn btn-primary" id="submitCalendar">저장</button>
 				</div>
 			</div>
 		</div>

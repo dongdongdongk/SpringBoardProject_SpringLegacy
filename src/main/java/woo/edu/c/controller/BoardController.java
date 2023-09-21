@@ -189,13 +189,18 @@ public class BoardController {
 	}
 	
 	//캘린더 일정추가 
+	@ResponseBody
 	@RequestMapping(value = "/board/setCalendar", method = RequestMethod.POST)
-	public ModelAndView setCalendar(CalendarVo calendarVo) throws Exception {
+	public String setCalendar(@RequestBody CalendarVo calendarVo) throws Exception {
 		logger.info("/board/setCalendar");
-		ModelAndView mv = new ModelAndView();
+		String message = null;
 		int result = boardService.setCalendar(calendarVo);
-		mv.setViewName("board/calendar");
-		return mv;
+		if(result==1) {
+       		 message = "success";
+    	}else {
+       		 message ="fail";
+		}
+		return message;
 	}
 	
 	//캘린더 디테일 가져오기 
