@@ -2,12 +2,12 @@ $(document).ready(function () {
 	calendarInit();
 	calendarList();
 	//버튼 클릭시 색 다시 불러오기 
-	$(".nav-btn.go-next").click(function () {
-		calendarList();
-	});
-	$(".nav-btn.go-prev").click(function () {
-		calendarList();
-	});
+	// $(".nav-btn.go-next").click(function () {
+	// 	calendarList();
+	// });
+	// $(".nav-btn.go-prev").click(function () {
+	// 	calendarList();
+	// });
 });
 
 const selectElement = document.querySelector(".month");
@@ -34,7 +34,7 @@ var currentMonth = thisMonth.getMonth(); // 달력에서 표기하는 월
 var currentDate = thisMonth.getDate(); // 달력에서 표기하는 일
 function calendarInit() {
 
-
+	document.getElementById("submitCalendar").addEventListener("click", handleSubmitCalendar);
 	// kst 기준 현재시간
 	// console.log(thisMonth);
 
@@ -60,12 +60,14 @@ function calendarInit() {
 	$('.go-prev').on('click', function () {
 		thisMonth = new Date(currentYear, currentMonth - 1, 1);
 		renderCalender(thisMonth);
+		calendarList();
 	});
 
 	// 다음달로 이동
 	$('.go-next').on('click', function () {
 		thisMonth = new Date(currentYear, currentMonth + 1, 1);
 		renderCalender(thisMonth);
+		calendarList();
 	});
 
 }
@@ -211,96 +213,111 @@ function getCalendarDetailList(button) {
 		$('.modalResult').append(table);
 	}
 
-	//캘린더 스케줄 추가 
-	document.getElementById("submitCalendar").addEventListener("click", function () {
-		const form = document.getElementById("setCalendar");
-		const calYear = form.querySelector("input[name='calYear']").value;
-		const calMonth = form.querySelector("input[name='calMonth']").value;
-		const calDay = form.querySelector("input[name='calDay']").value;
-		const calTime = form.querySelector("input[name='calTime']").value;
-		const calContents = form.querySelector("textarea[name='calContents']").value;
-		const calReq = form.querySelector("input[name='calReq']:checked");
-
-		// calReq의 경우 체크되었을 때만 값을 가져옴
-		if (calReq) {
-			calReqValue = calReq.value;
-		} else {
-			calReqValue = "0"; // 체크되지 않았을 때 기본값 설정
-		}
-		let formData = {
-			"calYear": calYear,
-			"calMonth": calMonth,
-			"calDay": calDay,
-			"calTime": calTime,
-			"calContents": calContents,
-			"calReq": calReqValue
-		}
-		console.log(formData)
-		$.ajax({
-			url: "/board/setCalendar",
-			type: "POST",
-			dataType: "text",
-			data: JSON.stringify(formData),
-			contentType: "application/json",
-			success: function (data) {
-				let currentYear = $('.inputYear').val();
-				let currentMonth = $('.inputMonth').val();
-
-				// 갱신된 데이터를 서버로부터 받아옴
-				$.ajax({
-					url: "/board/CalendarListData",
-					type: "GET",
-					dataType: "json",
-					contentType: "application/json",
-					success: function (data) {
-						console.log("데이터 받아오기 성공");
-						console.log(data);
-
-						// 다시 캘린더를 렌더링하고 현재 연도와 월로 설정
-						let thisMonth = new Date(currentYear, currentMonth - 1, 1);
-						renderCalender(thisMonth);
-						displayEventsOnCalendar(data);
-						 // input 창 비우기
-						 form.querySelector("input[name='calTime']").value = "";
-						 form.querySelector("textarea[name='calContents']").value = "";
-						 form.querySelector("input[name='calReq']").checked = false;
-						$.ajax({
-							url: '/board/CalendarDetail',
-							type: 'GET',
-							data: {
-								calDay: dayValue,
-								calMonth: monthValue,
-								calYear: yearValue
-							},
-							success: function (buttonData) {
-								console.log("성공")
-								CalendarListResult(buttonData)
-							},
-							error: function (error) {
-								console.log("실패")
-								console.log(yearValue)
-								console.log(monthValue)
-								console.log(dayValue)
-							}
-						});
-						console.log("버튼 정보는" + buttonData.dayValue)
-						console.log("버튼 정보는" + buttonData.monthValue)
-						console.log("버튼 정보는" + buttonData.yearValue)
-						// 캘린더 디테일 출력
-					},
-					error: function (error) {
-						console.error("데이터 받아오기 실패");
-						console.error(error);
-					}
-				});
-			},
-			error: function (error) {
-				console.error("추가 실패");
-				console.error(error);
-			}
-		});
-	});
+	
 }
+function handleSubmitCalendar() {
+    const form = document.getElementById("setCalendar");
+    const calYear = form.querySelector("input[name='calYear']").value;
+    const calMonth = form.querySelector("input[name='calMonth']").value;
+    const calDay = form.querySelector("input[name='calDay']").value;
+    const calTime = form.querySelector("input[name='calTime']").value;
+    const calContents = form.querySelector("textarea[name='calContents']").value;
+    const calReq = form.querySelector("input[name='calReq']:checked");
+
+    // calReq의 경우 체크되었을 때만 값을 가져옴
+    if (calReq) {
+        calReqValue = calReq.value;
+    } else {
+        calReqValue = "0"; // 체크되지 않았을 때 기본값 설정
+    }
+
+	    // 입력값 유효성 검사 (calTime 필드가 비어있을 때)
+		if (!calTime) {
+			alert("시간을 입력해주세요.");
+			return; 
+		}
+
+    // 클릭한 버튼에서 속성 값을 가져옵니다.
+    const dayValue = buttonData.dayValue;
+    const monthValue = buttonData.monthValue;
+    const yearValue = buttonData.yearValue;
+
+    let formData = {
+        "calYear": calYear,
+        "calMonth": calMonth,
+        "calDay": calDay,
+        "calTime": calTime,
+        "calContents": calContents,
+        "calReq": calReqValue
+    };
+    console.log(formData);
+
+    $.ajax({
+        url: "/board/setCalendar",
+        type: "POST",
+        dataType: "text",
+        data: JSON.stringify(formData),
+        contentType: "application/json",
+        success: function (data) {
+            let currentYear = $('.inputYear').val();
+            let currentMonth = $('.inputMonth').val();
+
+            // 갱신된 데이터를 서버로부터 받아옴
+            $.ajax({
+                url: "/board/CalendarListData",
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    console.log("데이터 받아오기 성공");
+                    console.log(data);
+
+                    // 다시 캘린더를 렌더링하고 현재 연도와 월로 설정
+                    let thisMonth = new Date(currentYear, currentMonth - 1, 1);
+                    renderCalender(thisMonth);
+                    displayEventsOnCalendar(data);
+
+                    // input 창 비우기
+                    form.querySelector("input[name='calTime']").value = "";
+                    form.querySelector("textarea[name='calContents']").value = "";
+                    form.querySelector("input[name='calReq']").checked = false;
+                    $.ajax({
+                        url: '/board/CalendarDetail',
+                        type: 'GET',
+                        data: {
+                            calDay: dayValue,
+                            calMonth: monthValue,
+                            calYear: yearValue
+                        },
+                        success: function (buttonData) {
+                            console.log("성공")
+                            CalendarListResult(buttonData);
+                        },
+                        error: function (error) {
+                            console.log("실패")
+                            console.log(yearValue)
+                            console.log(monthValue)
+                            console.log(dayValue)
+                        }
+                    });
+                    console.log("버튼 정보는" + dayValue);
+                    console.log("버튼 정보는" + monthValue);
+                    console.log("버튼 정보는" + yearValue);
+                    // 캘린더 디테일 출력
+                },
+                error: function (error) {
+                    console.error("데이터 받아오기 실패");
+                    console.error(error);
+                }
+            });
+        },
+        error: function (error) {
+            console.error("추가 실패");
+            console.error(error);
+        }
+    });
+}
+
 
 //캘린더 리스트  데이터 가져오기 (스케줄 있는날 표시를 위해서)
 function calendarList() {
@@ -352,13 +369,15 @@ function deleteItem(num, dataRowNumber) {
 	if (confirm("정말 삭제하시겠습니까??") == true) {
 		$.ajax({
 			url: "/board/CalendarDelete",
-			type: "GET",
+			type: "POST",
 			data: { calNo: num },
 			success: function (response) {
 
 			},
 			error: function (error) {
 				console.log("Remove 성공");
+				console.log(error);
+				console.log(dataRowNumber)
 				$("[data-row-number='" + dataRowNumber + "']").remove();
 				// 삭제 성공 시 현재 연도와 월 정보 가져오기
 				let currentYear = $('.inputYear').val();
@@ -391,15 +410,44 @@ function deleteItem(num, dataRowNumber) {
 	}
 }
 
-// // 체크박스 값 전송
-// function boxCheck() {
-// 	document
-// 		.querySelector('form')
-// 		.addEventListener('submit', function (event) {
-// 			// 체크박스가 체크되었는지 확인
-// 			if (document.getElementById("flexCheckDefault").checked) {
-// 				document
-// 					.getElementById("flexCheckDefault_hidden").disabled = true;
-// 			}
-// 		});
-// }
+
+function CalendarListResult(data) {
+	let table = $("<table>").addClass("table"); // 테이블 생성 및 클래스 추가
+
+	// 테이블 헤더 생성
+	let tableHead = $("<thead>");
+	let tableHeadRow = $("<tr>");
+	tableHeadRow.append("<th>시간</th>");
+	tableHeadRow.append("<th>내용</th>");
+	tableHeadRow.append("<th>중요</th>");
+	tableHeadRow.append("<th>삭제</th>");
+	tableHead.append(tableHeadRow);
+
+	// 테이블 본문 생성
+	let tableBody = $("<tbody>");
+	for (let i = 0; i < data.length; i++) {
+		let rowData = data[i];
+		let tableRow = $("<tr>");
+		let dataRowNumber = i + 1;
+		tableRow.attr("data-row-number", dataRowNumber);
+		tableRow.append("<td>" + rowData.calTime + "</td>");
+		tableRow.append("<td>" + rowData.calContents + "</td>");
+		if (rowData.calReq == 1) {
+			tableRow.append("<td><span style='color: red;'>*</span></td>");
+		} else {
+			tableRow.append("<td>" + "" + "</td>");
+		}
+		tableRow.append("<td><a href='#' onclick='deleteItem(" + rowData.calNo + "," + dataRowNumber + ");'>x</a></td>");
+		tableBody.append(tableRow);
+	}
+
+	// 테이블에 헤더와 본문 추가
+	table.append(tableHead);
+	table.append(tableBody);
+
+	// 이전에 있던 데이터 삭제
+	$('.modalResult').empty();
+
+	// 생성한 테이블을 추가
+	$('.modalResult').append(table);
+}

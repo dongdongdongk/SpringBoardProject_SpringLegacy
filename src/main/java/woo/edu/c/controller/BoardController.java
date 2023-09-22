@@ -222,7 +222,7 @@ public class BoardController {
 	}
 	
 	//캘린더 스케줄 삭제
-	@RequestMapping(value = "/board/CalendarDelete",method = RequestMethod.GET)
+	@RequestMapping(value = "/board/CalendarDelete",method = RequestMethod.POST)
 	public ModelAndView setCalendarDelete(CalendarVo calendarVo) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		int result = boardService.setCalendarDelete(calendarVo);
