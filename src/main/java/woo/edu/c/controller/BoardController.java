@@ -238,6 +238,17 @@ public class BoardController {
 	    result.put("month", cal.get(Calendar.MONTH) + 1); // 월은 0부터 시작하므로 1을 더해줍니다.
 	    return result;
 	}
+
+	//검색 게시판
+	@RequestMapping(value = "/board/searchBoard", method = RequestMethod.GET)
+	public ModelAndView getSearchBoard() throws Exception {
+		logger.info("searchBoard이동");
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/searchBoard");
+		return mv;
+		
+	}
+
 }
 
 
