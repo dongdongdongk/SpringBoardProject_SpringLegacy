@@ -1,10 +1,7 @@
 
-
-
-
 function test() {
     const text = document.querySelector("#searchInput").value;
-    const apiUrl ="https://dapi.kakao.com/v2/search/web"
+    const apiUrl ="https://dapi.kakao.com/v2/search/web";
     alert(text);
     
     fetch(apiUrl + `?query=${text}`, {
@@ -14,10 +11,29 @@ function test() {
         },
        })
        .then(response => response.json())
-       .then(date => console.log(date))
-       .catch(err => console.log(err));
+       .then(data => {
+        console.log(data);
+        const resultContainer = document.querySelector("#result");
+        resultContainer.innerHTML = ""; // 결과를 초기화
 
+        for (let i = 0; i < data.documents.length; i++) {
+            const document = data.documents[i];
+            const title = document.title;
+            const url = document.url;
+            const contents = document.contents;
+            const resultText = `<h2><a href="${url}">${title}</a></h2><a>${url}</a><div>${contents}</div>`
+            resultContainer.innerHTML += resultText;
+        }
+    })
+    .catch(err => {
+        console.log("Fetch error:", err);
+    });
 }
+
+
+
+
+
 
 
 

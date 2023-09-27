@@ -5,10 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<c:import url="../common/common.jsp"></c:import>
-<c:import url="../common/nav.jsp"></c:import>
-<link rel="stylesheet" href="/css/calendar.css">
 <head>
+    <c:import url="../common/common.jsp"></c:import>
+    <c:import url="../common/nav.jsp"></c:import>
 <title>검색</title>
 </head>
 <body>
@@ -18,6 +17,7 @@
         <input type="text" class="form-control" name="searchInput" id="searchInput" />
         <button class="button" onclick="test()">입력</button>
     </div>
+    <div id="result"></div>
     <script src="../js/searchBoard.js"></script>
 </body>
 </html>
