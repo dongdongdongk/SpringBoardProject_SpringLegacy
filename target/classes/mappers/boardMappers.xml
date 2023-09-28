@@ -63,29 +63,28 @@
 		
 <!-- 캘린더 추가 -->
 			<insert id="setCalendar" parameterType="CalendarVO">
-			<selectKey keyProperty="calNo" resultType="Long" order="BEFORE">
- 				SELECT calendar_seq.NEXTVAL 
- 				  FROM DUAL
- 			</selectKey>
-			  INSERT INTO CALENDAR (
-				calNo,
-				calYear,
-				calMonth,
-				calDay,
-				calTime,
-				calReq,
-				calContents
-			) VALUES (
-				#{calNo},
-				#{calYear},
-				#{calMonth},
-				#{calDay},
-				#{calTime},
-				#{calReq},
-				#{calContents}
-			)
-	 
-		</insert>		
+				<selectKey keyProperty="calNo" resultType="Long" order="BEFORE">
+	 				SELECT calendar_seq.NEXTVAL 
+	 				  FROM DUAL
+	 			</selectKey>
+				  INSERT INTO CALENDAR (
+					calNo,
+					calYear,
+					calMonth,
+					calDay,
+					calTime,
+					calReq,
+					calContents
+				) VALUES (
+					#{calNo},
+					#{calYear},
+					#{calMonth},
+					#{calDay},
+					#{calTime},
+					#{calReq},
+					#{calContents}
+				)
+			</insert>		
 		
 <!-- 캘린더 리스트 가져오기 -->
 		<select id="getCalendarList" resultType="CalendarVo">

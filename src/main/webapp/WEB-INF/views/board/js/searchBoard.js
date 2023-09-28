@@ -1,4 +1,5 @@
 
+// 웹 겁색 기능
 function test() {
     const text = document.querySelector("#searchInput").value;
     const apiUrl ="https://dapi.kakao.com/v2/search/web";
@@ -31,6 +32,18 @@ function test() {
 }
 
 
+// 탭 사용 함수
+$(function(){
+    var hash = window.location.hash;
+    hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+  
+    $('.nav-tabs a').click(function (e) {
+      $(this).tab('show');
+      var scrollmem = $('body').scrollTop();
+      window.location.hash = this.hash;
+      $('html,body').scrollTop(scrollmem);
+    });
+  });
 
 
 
