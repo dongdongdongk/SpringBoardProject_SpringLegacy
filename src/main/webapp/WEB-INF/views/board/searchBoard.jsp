@@ -47,10 +47,18 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="tab2">
-                                            <p>I'm in Section 2.</p>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div id="vclipResult"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="tab-pane" id="tab3">
-                                            <p>I'm in Section 3.</p>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div id="imageResult"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
