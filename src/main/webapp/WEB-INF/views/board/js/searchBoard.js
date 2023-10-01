@@ -21,7 +21,7 @@ function test() {
             const url = document.url;
             const contents = document.contents;
             const resultText = 
-            `<div class="mb-4">
+            `<div style="margin-bottom: 35px;">
                 <h3>
                     <a href="${url}">${title}</a>
                 </h3>
@@ -63,7 +63,23 @@ function videoSearch() {
             const url = document.url;
             const play_time = document.play_time;
             const dateTime = document.datetime;
-            const resultText = `<h2><a href="${url}">${title}</a></h2><a>${url}</a><div>${play_time}</div><div>${dateTime}</div>`
+            const thumbnail = document.thumbnail;
+            const resultText = 
+            `<div class="row">
+                <div style="position: relative; top: 50%; transform: translateY(-50%);">
+                    <div class="col-md-2">
+                        <img alt="em" src="${thumbnail}">
+                    </div>
+                    <div class="col-md-10">
+                        <h3>
+                            <a href="${url}">${title}</a>
+                        </h3>
+                        <a>${url}</a>
+                        <div>${play_time}</div>
+                        <div>${dateTime}</div>
+                    </div>
+                </div>
+            </div>`
             resultContainer.innerHTML += resultText;
         }
     })
@@ -94,7 +110,7 @@ function imageSearch() {
             const thumbnail_url = document.thumbnail_url;
             const image_url = document.image_url;
             const resultText = 
-            `<div class="col-12 col-md-3 mb-3">
+            `<div class="col-12 col-md-3 mb-3" style="margin-bottom: 15px;">
                 <img alt="em" src="${thumbnail_url}">
                 <a href="${image_url}"></a>
             </div>`

@@ -54,9 +54,11 @@
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="tab3">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div id="imageResult"></div>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div id="imageResult"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
