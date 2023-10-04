@@ -27,4 +27,6 @@
 	$('#DetailClose').on("click",function(){
 		$("#ajaxBoardDetailResult").empty();
 	});
+
+	//수정수정수정
 </script>
