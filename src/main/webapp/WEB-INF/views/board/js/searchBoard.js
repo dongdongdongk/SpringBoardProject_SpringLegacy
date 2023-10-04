@@ -1,6 +1,4 @@
 
-
-
 let webViewPage = 1;
 let imageViewPage = 1;
 let videoViewPage = 1;
@@ -10,6 +8,7 @@ const initButtonHide = document.querySelectorAll(".seeMoreButton");
 initButtonHide.forEach(button => {
     button.style.display = "none";
 });
+
 
 
 // 페이지 초기화 버튼 
