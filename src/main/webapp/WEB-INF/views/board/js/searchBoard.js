@@ -212,8 +212,13 @@ $(function(){
     });
 });
 
-
-
+//엔터 클릭시 검색
+document.getElementById("searchInput").addEventListener("keydown", function(event) {
+    if (event.keyCode === 13) {
+        resetPage();
+        test();
+    }
+});
 
 
 

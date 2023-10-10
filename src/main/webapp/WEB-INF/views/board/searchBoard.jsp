@@ -26,7 +26,7 @@
                             <input type="text" class="form-control" placeholder="Search" name="searchInput" id="searchInput" >
                             <span class="input-group-addon">
                                 <button  type="submit">
-                                    <span class="glyphicon glyphicon-search" onclick="resetPage(); test();"></span>
+                                    <span class="glyphicon glyphicon-search" onclick="resetPage(); test();" onkeypress="if( event.keyCode == 13 ){resetPage(); test();}"></span>
                                 </button>
                             </span>
                         </div>
@@ -47,7 +47,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div id="result"></div>
-                                                    <button class="seeMoreButton" id="webSeeMoreButton"
+                                                    <button class="seeMoreButton btn btn-link" id="webSeeMoreButton"
                                                         onclick="webSeeMoreButton()">더보기</button>
                                                 </div>
                                             </div>
@@ -56,7 +56,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div id="vclipResult"></div>
-                                                    <button class="seeMoreButton" id="videoSeeMoreButton"
+                                                    <button class="seeMoreButton btn btn-link" id="videoSeeMoreButton"
                                                         onclick="videoSeeMoreButton()">더보기</button>
                                                 </div>
                                             </div>
@@ -66,7 +66,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div id="imageResult"></div>
-                                                        <button class="seeMoreButton" id="imageSeeMoreButton"
+                                                        <button class="seeMoreButton btn btn-link" id="imageSeeMoreButton"
                                                             onclick="imageSeeMoreButton()">더보기</button>
                                                     </div>
                                                 </div>
