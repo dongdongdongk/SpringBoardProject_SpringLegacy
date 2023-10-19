@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/main/java/woo/edu/c/controller/BoardController.java=UTF-8
+encoding//src/main/java/woo/edu/c/dao/BoardDaoImpl.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/board/boardhome.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/board/calculator.jsp=UTF-8

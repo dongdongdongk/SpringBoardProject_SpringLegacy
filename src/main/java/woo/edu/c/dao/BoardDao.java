@@ -2,6 +2,7 @@ package woo.edu.c.dao;
 
 import java.util.List;
 
+import woo.edu.c.utill.Pager;
 import woo.edu.c.vo.CalendarVo;
 import woo.edu.c.vo.boardVo;
 import woo.edu.c.vo.testVo;
@@ -10,7 +11,7 @@ public interface BoardDao {
 	//text 
 	List<testVo> test();
 	//게시판 불러오기
-	List<boardVo> getBoardList();
+	List<boardVo> getBoardList(Pager pager);
 	//게시판 상세
 	boardVo getBoardDetail(boardVo boardVo);
 	//게시글 추가
@@ -30,4 +31,7 @@ public interface BoardDao {
 	
 	//캘린더 스케줄 삭제
 	int setCalendarDelete(CalendarVo calendarVo);
+	
+	//페이저 총 카운트
+	Long getTotalCount(Pager pager);
 }

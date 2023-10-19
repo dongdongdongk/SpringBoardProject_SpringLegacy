@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jdk.internal.org.objectweb.asm.tree.analysis.Value;
 import woo.edu.c.service.BoardService;
+import woo.edu.c.utill.Pager;
 import woo.edu.c.vo.CalendarVo;
 import woo.edu.c.vo.boardVo;
 import woo.edu.c.vo.testVo;
@@ -43,11 +44,13 @@ public class BoardController {
 	
 	// 게시글 리스트
 	@RequestMapping(value = "/board/boardList", method = RequestMethod.GET)
-	public String boardList(Model model) throws Exception {
+	public ModelAndView boardList(Pager pager) throws Exception {
 		logger.info("/board/list");
-		List<boardVo> boardList = boardService.getBoardList();
-		model.addAttribute("boardList", boardList);
-		return "/board/boardList";
+		ModelAndView mv = new ModelAndView();
+		List<boardVo> boardList = boardService.getBoardList(pager);
+		mv.addObject("boardList", boardList);
+		mv.setViewName("/board/boardList");
+		return mv;
 	}
 	
 		
@@ -112,22 +115,22 @@ public class BoardController {
 	
 	
 	//Ajax 게시판 이동
-	@RequestMapping(value = "/board/boardAjax", method = RequestMethod.GET)
-	public String AjaxBoardAjax(Model model) throws Exception {
-		logger.info("/board/AjaxList");
-		List<boardVo> ajaxBoardList = boardService.getBoardList();
-		model.addAttribute("ajaxBoardList", ajaxBoardList);
-		return "/board/boardAjax";
-	}
-	//Ajax 리스트 출력
-	@RequestMapping(value = "/board/boardAjaxList", method = RequestMethod.GET)
-	@ResponseBody
-	public List<boardVo> AjaxBoardList(Model model) throws Exception {
-		logger.info("/board/AjaxList");
-		List<boardVo> ajaxBoardList = boardService.getBoardList();
-		model.addAttribute("ajaxBoardList", ajaxBoardList);
-		return ajaxBoardList;
-	}
+//	@RequestMapping(value = "/board/boardAjax", method = RequestMethod.GET)
+//	public String AjaxBoardAjax(Model model) throws Exception {
+//		logger.info("/board/AjaxList");
+//		List<boardVo> ajaxBoardList = boardService.getBoardList(pager);
+//		model.addAttribute("ajaxBoardList", ajaxBoardList);
+//		return "/board/boardAjax";
+//	}
+//	//Ajax 리스트 출력
+//	@RequestMapping(value = "/board/boardAjaxList", method = RequestMethod.GET)
+//	@ResponseBody
+//	public List<boardVo> AjaxBoardList(Model model) throws Exception {
+//		logger.info("/board/AjaxList");
+//		List<boardVo> ajaxBoardList = boardService.getBoardList();
+//		model.addAttribute("ajaxBoardList", ajaxBoardList);
+//		return ajaxBoardList;
+//	}
 	
 	//Ajax 게시글 추가
 	@RequestMapping(value = "/board/AjaxBoardAdd", method = RequestMethod.GET)
@@ -245,6 +248,16 @@ public class BoardController {
 		logger.info("searchBoard이동");
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("board/searchBoard");
+		return mv;
+		
+	}
+
+	//로그인 페이지 이동
+	@RequestMapping(value = "/board/userLogin", method = RequestMethod.GET)
+	public ModelAndView getUserLogin() throws Exception {
+		logger.info("UserLogin이동");
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/userLogin");
 		return mv;
 		
 	}

@@ -5,9 +5,48 @@
   
 	<mapper namespace="woo.edu.c.dao.BoardDao">
 
+	<sql id="boardCondition">
+	  			
+	  	<if test="kind == 'title'">
+	  		WHERE TITLE LIKE '%' || #{search} || '%'
+	  	</if>
+	  			
+	  	<if test="kind == 'contents'">
+	  		WHERE CONTENTS LIKE '%' || #{search} || '%'
+	  	</if>
+	  			
+	  	<if test="kind == 'writer'">
+	  		WHERE WRITER LIKE '%' || #{search} || '%'
+	  	</if>
+	  		
+  	</sql>
+
+	<select id="getTotalCount" resultType="Long" parameterType="Pager">
+		SELECT COUNT(NUM) FROM BOARD
 		
+		<include refid="boardCondition"></include>
+	</select>
+		
+	<select id="getBoardList" parameterType="Pager" resultType="boardVo">
+  		SELECT * FROM
+  			(
+	  			SELECT ROWNUM R, N.* FROM
+		  			(
+			  			SELECT NUM, 
+							   TITLE,
+							   CONTENTS, 
+							   WRITER, 
+							   WRITEDAY 
+						  FROM BOARD
+			  			<include refid="boardCondition"></include>
+			  			ORDER BY WRITEDAY DESC
+		  			) N
+  			)
+  			WHERE R BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+	
 <!-- 	리스트출력 -->
-		<select id="getBoardList" resultType="boardVo">
+		<!-- <select id="getBoardList" resultType="boardVo">
 			SELECT 
 				   NUM,
 				   TITLE,
@@ -16,7 +55,7 @@
 				   WRITEDAY
 			 FROM  BOARD
 		    ORDER BY WRITEDAY DESC 
-		</select>
+		</select> -->
 <!-- 게시글 상세 -->
 		<select id = "getBoardDetail" parameterType="boardVo" resultType="boardVo">
 			SELECT 

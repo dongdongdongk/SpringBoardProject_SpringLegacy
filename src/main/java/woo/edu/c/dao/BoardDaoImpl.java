@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import woo.edu.c.controller.HomeController;
+import woo.edu.c.utill.Pager;
 import woo.edu.c.vo.CalendarVo;
 import woo.edu.c.vo.boardVo;
 import woo.edu.c.vo.testVo;
@@ -26,51 +27,55 @@ public class BoardDaoImpl implements BoardDao {
 	public List<testVo> test() {
 		return sql.selectList(namespace + ".test");
 	}
-	//°Ô½ÃÆÇ ºÒ·¯¿À±â
+	//å ìŒ‰ì™ì˜™å ì™ì˜™ å ìŒ€ë¤„ì˜™å ì™ì˜™å ì™ì˜™
 	@Override
-	public List<boardVo> getBoardList() {
-		return sql.selectList(namespace + ".getBoardList");
+	public List<boardVo> getBoardList(Pager pager) {
+		return sql.selectList(namespace + ".getBoardList",pager);
 	}
-	//°Ô½ÃÆÇ »ó¼¼
+	//å ìŒ‰ì™ì˜™å ì™ì˜™ å ì™ì˜™
 	@Override
 	public boardVo getBoardDetail(boardVo boardVo) {
 		// TODO Auto-generated method stub
 		return sql.selectOne(namespace + ".getBoardDetail",boardVo);
 	}
-	//°Ô½Ã±Û Ãß°¡
+	//å ìŒ‰ì‹œê¹ì˜™ å ìŒ©ê³¤ì˜™
 	@Override
 	public int setBoardAdd(boardVo boardVo) {
 		return sql.insert(namespace + ".setBoardAdd",boardVo);
 	}
-	//°Ô½Ã±Û »èÁ¦
+	//å ìŒ‰ì‹œê¹ì˜™ å ì™ì˜™å ì™ì˜™
 	@Override
 	public int setBoardDelete(boardVo boardVo) {
 		return sql.delete(namespace + ".setBoardDelete",boardVo);
 	}
-	//°Ô½Ã±Û ¾÷µ¥ÀÌÆ®
+	//å ìŒ‰ì‹œê¹ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™íŠ¸
 	@Override
 	public int setBoardUpdate(boardVo boardVo) {
 		return sql.update(namespace + ".setBoardUpdate", boardVo);
 	}
-	//Ä¶¸°´õ ÀÏÁ¤Ãß°¡ 
+	//ìº˜å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ìŒ©ê³¤ì˜™ 
 	@Override
 	public int setCalendar(CalendarVo calendarVo) {
 		return sql.insert(namespace + ".setCalendar", calendarVo);
 	}
-	//Ä¶¸°´õ ¸®½ºÆ® Ãâ·Â
+	//ìº˜å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™íŠ¸ å ì™ì˜™å ï¿½
 	@Override
 	public List<CalendarVo> getCalendarList(CalendarVo calendarVo) {
 		return sql.selectList(namespace + ".getCalendarList",calendarVo);
 	}
-	//Ä¶¸°´õ µğÅ×ÀÏ ¸®½ºÆ® Ãâ·Â
+	//ìº˜å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™íŠ¸ å ì™ì˜™å ï¿½
 	@Override
 	public List<CalendarVo> getCalendarDetailList(CalendarVo calendarVo) {
 		return sql.selectList(namespace + ".getCalendarDetailList",calendarVo);
 	}
-	//Ä¶¸°´õ ½ºÄÉÁÙ »èÁ¦
+	//ìº˜å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
 	@Override
 	public int setCalendarDelete(CalendarVo calendarVo) {
 		return sql.delete(namespace + ".setCalendarDelete",calendarVo);
+	}
+	@Override
+	public Long getTotalCount(Pager pager) {
+		return sql.selectOne(namespace + ".getTotalCount",pager);
 	}
 	
 }

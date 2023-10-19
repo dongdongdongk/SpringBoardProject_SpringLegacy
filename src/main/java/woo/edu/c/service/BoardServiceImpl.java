@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import woo.edu.c.controller.HomeController;
 import woo.edu.c.dao.BoardDao;
+import woo.edu.c.utill.Pager;
 import woo.edu.c.vo.CalendarVo;
 import woo.edu.c.vo.boardVo;
 import woo.edu.c.vo.testVo;
@@ -30,8 +31,13 @@ public class BoardServiceImpl implements BoardService{
 	}
 	//게시판 불러오기
 	@Override
-	public List<boardVo> getBoardList() {
-		return boardDao.getBoardList();
+	public List<boardVo> getBoardList(Pager pager) {
+		pager.makeRow();
+		
+		pager.makeNum(boardDao.getTotalCount(pager));
+		
+		
+		return boardDao.getBoardList(pager);
 	}
 	//게시판 상세
 	@Override

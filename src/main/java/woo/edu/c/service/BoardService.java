@@ -2,6 +2,7 @@ package woo.edu.c.service;
 
 import java.util.List;
 
+import woo.edu.c.utill.Pager;
 import woo.edu.c.vo.CalendarVo;
 import woo.edu.c.vo.boardVo;
 import woo.edu.c.vo.testVo;
@@ -10,7 +11,7 @@ public interface BoardService {
 	//text
 	List<testVo> test();
 	//게시판 불러오기
-	List<boardVo> getBoardList();
+	List<boardVo> getBoardList(Pager pager);
 	//게시판 상세
 	boardVo getBoardDetail(boardVo boardVo);
 	//게시글 추가

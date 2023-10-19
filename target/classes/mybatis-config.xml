@@ -5,6 +5,7 @@
 		<typeAlias type="woo.edu.c.vo.testVo" alias="testVo"/>
 		<typeAlias type="woo.edu.c.vo.boardVo" alias="boardVo"/>
 		<typeAlias type="woo.edu.c.vo.CalendarVo" alias="CalendarVo"/>
+		<typeAlias type="woo.edu.c.utill.Pager" alias="Pager"/>
 		<typeAlias type="java.lang.Long" alias="Long"/>
 	</typeAliases>
 </configuration>
