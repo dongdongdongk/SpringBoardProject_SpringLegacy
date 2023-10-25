@@ -261,6 +261,15 @@ public class BoardController {
 		return mv;
 		
 	}
+	//회원가입 페이지 이동
+	@RequestMapping(value = "/board/userJoin", method = RequestMethod.GET)
+	public ModelAndView getUserJoin() throws Exception {
+		logger.info("UserJoin이동");
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/userJoin");
+		return mv;
+		
+	}
 
 }
 

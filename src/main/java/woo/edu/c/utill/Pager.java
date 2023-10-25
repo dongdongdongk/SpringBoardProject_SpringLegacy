@@ -1,17 +1,30 @@
 package woo.edu.c.utill;
 
-public class Pager {	
-	private Long num;
+public class Pager {
+	
+	//검색 종류(사용할 column)
 	private String kind;
+	//검색어
 	private String search;
 	
+	//한페이지에 출력할 ROW의 갯수
 	private Long perPage;
+	
+	//한블럭당 출력할 번호의 갯수
 	private Long perBlock;
+	
+	//전체 page 갯수
 	private Long totalPage;
+	
+	//Client가 보고싶은 페이지 번호(parameter)
 	private Long page;
-
+	
+	//Table에서 조회할 시작번호
 	private Long startRow;
+	//Table에서 조회할 끝번호
 	private Long lastRow;
+	
+	//전체 row의 갯수를 담을 변수
 	//private Long totalCount;
 	
 	private Long startNum;
@@ -19,39 +32,12 @@ public class Pager {
 	
 	private boolean before;
 	private boolean after;
-
-	public Long getNum() {
-		return num;
-	}
-
-	public void setNum(Long num) {
-		this.num = num;
-	}
-
-	public String getKind() {
-		return kind;
-	}
-
-	public void setKind(String kind) {
-		this.kind = kind;
-	}
-
-	public String getSearch() {
-		return search;
-	}
-
-	public void setSearch(String search) {
-		this.search = search;
-	}
-
-	public void setTotalPage(Long totalPage) {
-		this.totalPage = totalPage;
-	}
-
+	
 	public Pager() {
 		this.perPage=10L;
 	}
 	
+	//startRow, lastRow 계산 하는 메서드
 	public void makeRow() {
 		this.startRow = (this.getPage()-1)*this.getPerPage()+1;
 		this.lastRow = this.getPage()*this.getPerPage();
@@ -60,6 +46,8 @@ public class Pager {
 	//startNum, lastNum
 	public void makeNum(Long totalCount) {
 		
+		//1. 전체 row의 갯수 구하기
+		//2. 총 page의 갯수 구하기
 		this.totalPage = totalCount/this.getPerPage();
 		if(totalCount%this.getPerPage() != 0 ) {
 			//totalPage=totalPage+1;
@@ -69,12 +57,16 @@ public class Pager {
 		if(this.getPage()>totalPage) {
 			this.setPage(totalPage);
 		}
+		//3. 한 블럭에 출력할 번호의 갯수
 		
 		
+		//4. 총 블럭의 수 구하기
 		Long totalBlock = totalPage / this.getPerBlock();
 		if(totalPage % this.getPerBlock() != 0) {
 			totalBlock++;
 		}
+		
+		//5. page 번호로 현재 블럭 번호 구하기
 		// page 1-5 curBlock 1
 		// page 6-10 curBlock 2
 		// page 11-15 curBlock 3
@@ -84,6 +76,7 @@ public class Pager {
 			 curBlock++;
 		 }
 		 
+		 //6. curBlock의 시작번호와 끝번호를 계산
 		 /**	curBlock	startNum	lastNum
 		  * 	1			1			5
 		  * 	2			6			10
@@ -123,6 +116,25 @@ public class Pager {
 			this.perPage=10L;
 		}
 		return perPage;
+	}
+	
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
+	public String getSearch() {
+		if(search == null) {
+			search="";
+		}
+		return search; //"%"+search+"%";
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
 	}
 
 	public Long getTotalPage() {
@@ -196,6 +208,10 @@ public class Pager {
 
 	public void setLastNum(Long lastNum) {
 		this.lastNum = lastNum;
-	}	
+	}
+	
+	
+	
+	
 
 }

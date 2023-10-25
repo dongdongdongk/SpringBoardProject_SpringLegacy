@@ -15,6 +15,7 @@
 		<div class="row col-md-9 mx-auto">
 			<h1>HOME</h1>
 			<a href="http://www.wooriict.com" target="_blank"><img alt="em" src="../img/wooriict.png"></a>
+			<button onclick="location.href='/board/userLogin'">로그인</button>
 		</div>
 	</div>
 </div>

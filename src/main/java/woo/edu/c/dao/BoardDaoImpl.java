@@ -27,55 +27,55 @@ public class BoardDaoImpl implements BoardDao {
 	public List<testVo> test() {
 		return sql.selectList(namespace + ".test");
 	}
-	//å ìŒ‰ì™ì˜™å ì™ì˜™ å ìŒ€ë¤„ì˜™å ì™ì˜™å ì™ì˜™
+	//? ?Œ‰?™?˜™? ?™?˜™ ? ???ë¤„ì˜™? ?™?˜™? ?™?˜™
 	@Override
 	public List<boardVo> getBoardList(Pager pager) {
 		return sql.selectList(namespace + ".getBoardList",pager);
-	}
-	//å ìŒ‰ì™ì˜™å ì™ì˜™ å ì™ì˜™
-	@Override
-	public boardVo getBoardDetail(boardVo boardVo) {
-		// TODO Auto-generated method stub
-		return sql.selectOne(namespace + ".getBoardDetail",boardVo);
-	}
-	//å ìŒ‰ì‹œê¹ì˜™ å ìŒ©ê³¤ì˜™
-	@Override
-	public int setBoardAdd(boardVo boardVo) {
-		return sql.insert(namespace + ".setBoardAdd",boardVo);
-	}
-	//å ìŒ‰ì‹œê¹ì˜™ å ì™ì˜™å ì™ì˜™
-	@Override
-	public int setBoardDelete(boardVo boardVo) {
-		return sql.delete(namespace + ".setBoardDelete",boardVo);
-	}
-	//å ìŒ‰ì‹œê¹ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™íŠ¸
-	@Override
-	public int setBoardUpdate(boardVo boardVo) {
-		return sql.update(namespace + ".setBoardUpdate", boardVo);
-	}
-	//ìº˜å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ìŒ©ê³¤ì˜™ 
-	@Override
-	public int setCalendar(CalendarVo calendarVo) {
-		return sql.insert(namespace + ".setCalendar", calendarVo);
-	}
-	//ìº˜å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™íŠ¸ å ì™ì˜™å ï¿½
-	@Override
-	public List<CalendarVo> getCalendarList(CalendarVo calendarVo) {
-		return sql.selectList(namespace + ".getCalendarList",calendarVo);
-	}
-	//ìº˜å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™íŠ¸ å ì™ì˜™å ï¿½
-	@Override
-	public List<CalendarVo> getCalendarDetailList(CalendarVo calendarVo) {
-		return sql.selectList(namespace + ".getCalendarDetailList",calendarVo);
-	}
-	//ìº˜å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™å ì™ì˜™ å ì™ì˜™å ì™ì˜™
-	@Override
-	public int setCalendarDelete(CalendarVo calendarVo) {
-		return sql.delete(namespace + ".setCalendarDelete",calendarVo);
 	}
 	@Override
 	public Long getTotalCount(Pager pager) {
 		return sql.selectOne(namespace + ".getTotalCount",pager);
 	}
 	
+	//? ?Œ‰?™?˜™? ?™?˜™ ? ?™?˜™
+	@Override
+	public boardVo getBoardDetail(boardVo boardVo) {
+		// TODO Auto-generated method stub
+		return sql.selectOne(namespace + ".getBoardDetail",boardVo);
+	}
+	//? ?Œ‰?‹œê¹ì˜™ ? ?Œ©ê³¤ì˜™
+	@Override
+	public int setBoardAdd(boardVo boardVo) {
+		return sql.insert(namespace + ".setBoardAdd",boardVo);
+	}
+	//? ?Œ‰?‹œê¹ì˜™ ? ?™?˜™? ?™?˜™
+	@Override
+	public int setBoardDelete(boardVo boardVo) {
+		return sql.delete(namespace + ".setBoardDelete",boardVo);
+	}
+	//? ?Œ‰?‹œê¹ì˜™ ? ?™?˜™? ?™?˜™? ?™?˜™?Š¸
+	@Override
+	public int setBoardUpdate(boardVo boardVo) {
+		return sql.update(namespace + ".setBoardUpdate", boardVo);
+	}
+	//ìº˜å ?™?˜™? ?™?˜™ ? ?™?˜™? ?™?˜™? ?Œ©ê³¤ì˜™ 
+	@Override
+	public int setCalendar(CalendarVo calendarVo) {
+		return sql.insert(namespace + ".setCalendar", calendarVo);
+	}
+	//ìº˜å ?™?˜™? ?™?˜™ ? ?™?˜™? ?™?˜™?Š¸ ? ?™?˜™? ï¿?
+	@Override
+	public List<CalendarVo> getCalendarList(CalendarVo calendarVo) {
+		return sql.selectList(namespace + ".getCalendarList",calendarVo);
+	}
+	//ìº˜å ?™?˜™? ?™?˜™ ? ?™?˜™? ?™?˜™? ?™?˜™ ? ?™?˜™? ?™?˜™?Š¸ ? ?™?˜™? ï¿?
+	@Override
+	public List<CalendarVo> getCalendarDetailList(CalendarVo calendarVo) {
+		return sql.selectList(namespace + ".getCalendarDetailList",calendarVo);
+	}
+	//ìº˜å ?™?˜™? ?™?˜™ ? ?™?˜™? ?™?˜™? ?™?˜™ ? ?™?˜™? ?™?˜™
+	@Override
+	public int setCalendarDelete(CalendarVo calendarVo) {
+		return sql.delete(namespace + ".setCalendarDelete",calendarVo);
+	}
 }

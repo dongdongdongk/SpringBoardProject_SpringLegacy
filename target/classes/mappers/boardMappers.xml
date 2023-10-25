@@ -15,9 +15,9 @@
 	  		WHERE CONTENTS LIKE '%' || #{search} || '%'
 	  	</if>
 	  			
-	  	<if test="kind == 'writer'">
+	  	<!-- <if test="kind == 'writer'">
 	  		WHERE WRITER LIKE '%' || #{search} || '%'
-	  	</if>
+	  	</if> -->
 	  		
   	</sql>
 
